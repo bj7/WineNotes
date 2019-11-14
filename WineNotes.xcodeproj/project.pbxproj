@@ -16,7 +16,7 @@
 		0AF6CB2F226FE3DC0067CBEB /* WineNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF6CB2E226FE3DC0067CBEB /* WineNotesTests.swift */; };
 		0AF6CB3A226FE3DC0067CBEB /* WineNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF6CB39226FE3DC0067CBEB /* WineNotesUITests.swift */; };
 		0AF6CB48227284210067CBEB /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF6CB47227284210067CBEB /* SideViewController.swift */; };
-		0AF6CB4C22728CB40067CBEB /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF6CB4B22728CB40067CBEB /* CenterViewController.swift */; };
+		0AF6CB4C22728CB40067CBEB /* NoteEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF6CB4B22728CB40067CBEB /* NoteEntryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		0AF6CB39226FE3DC0067CBEB /* WineNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineNotesUITests.swift; sourceTree = "<group>"; };
 		0AF6CB3B226FE3DC0067CBEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AF6CB47227284210067CBEB /* SideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
-		0AF6CB4B22728CB40067CBEB /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
+		0AF6CB4B22728CB40067CBEB /* NoteEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 				0AF6CB25226FE3DC0067CBEB /* Info.plist */,
 				0AF6CB1D226FE3DB0067CBEB /* WineNotes.xcdatamodeld */,
 				0AF6CB47227284210067CBEB /* SideViewController.swift */,
-				0AF6CB4B22728CB40067CBEB /* CenterViewController.swift */,
+				0AF6CB4B22728CB40067CBEB /* NoteEntryViewController.swift */,
 			);
 			path = WineNotes;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 				0AF6CB48227284210067CBEB /* SideViewController.swift in Sources */,
 				0AF6CB17226FE3DB0067CBEB /* AppDelegate.swift in Sources */,
 				0AF6CB1F226FE3DB0067CBEB /* WineNotes.xcdatamodeld in Sources */,
-				0AF6CB4C22728CB40067CBEB /* CenterViewController.swift in Sources */,
+				0AF6CB4C22728CB40067CBEB /* NoteEntryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
