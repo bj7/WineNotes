@@ -14,22 +14,34 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     let calendar = Calendar.current;
     
     @IBOutlet weak var yearPicker: UIPickerView!
-    
     @IBOutlet weak var wineTextField: UITextField!
-    
     @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var regionTextField: UITextField!
+    @IBOutlet weak var varietyTextField: UITextField!
+    @IBOutlet weak var recommendedTextField: UITextField!
     
     override func viewDidLoad() {
         let year = calendar.component(.year, from: date);
         for i in 500...year {
             years.append(i)
         }
+        
+        
+        
         wineTextField.delegate = self;
+        
         priceTextField.delegate = self;
+        self.priceTextField.keyboardType = UIKeyboardType.decimalPad;
+        
         yearPicker.dataSource = self;
         yearPicker.delegate = self;
-
         yearPicker.selectRow(years.count - 3, inComponent: 0, animated: true);
+        
+        regionTextField.delegate = self;
+        
+        varietyTextField.delegate = self;
+        
+        recommendedTextField.delegate = self;
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -41,7 +53,7 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //For numers
         if textField == priceTextField {
-            let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
+            let allowedCharacters = CharacterSet(charactersIn:"0123456789.")//Here change this characters based on your requirement
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
         }
