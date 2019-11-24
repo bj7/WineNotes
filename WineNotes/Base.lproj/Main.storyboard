@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uk3-vs-a6v">
-                                <rect key="frame" x="0.0" y="44" width="414" height="956"/>
+                                <rect key="frame" x="15" y="0.0" width="399" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i10-W3-OVq">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="399" height="1300"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Wine Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVU-20-TOH">
                                                 <rect key="frame" x="20" y="63" width="374" height="49"/>
@@ -108,7 +108,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEB-de-ZgZ">
-                                                <rect key="frame" x="20" y="163" width="374" height="147"/>
+                                                <rect key="frame" x="20" y="163" width="359" height="147"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             </pickerView>
                                         </subviews>
@@ -133,9 +133,9 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Uk3-vs-a6v" secondAttribute="bottom" id="SJg-tK-60P"/>
                             <constraint firstItem="Uk3-vs-a6v" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xxc-4Z-Hcc"/>
-                            <constraint firstItem="Uk3-vs-a6v" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YAX-R7-K8q"/>
-                            <constraint firstItem="Uk3-vs-a6v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d3A-eF-MD7"/>
-                            <constraint firstItem="i10-W3-OVq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="mhQ-ev-wde"/>
+                            <constraint firstItem="Uk3-vs-a6v" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="YAX-R7-K8q"/>
+                            <constraint firstItem="Uk3-vs-a6v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="d3A-eF-MD7"/>
+                            <constraint firstItem="i10-W3-OVq" firstAttribute="width" secondItem="Uk3-vs-a6v" secondAttribute="width" id="mhQ-ev-wde"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
