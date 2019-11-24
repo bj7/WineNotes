@@ -27,7 +27,6 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         
         
-        
         wineTextField.delegate = self;
         
         priceTextField.delegate = self;
