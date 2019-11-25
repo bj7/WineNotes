@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uk3-vs-a6v">
-                                <rect key="frame" x="15" y="0.0" width="399" height="1000"/>
+                                <rect key="frame" x="15" y="44" width="399" height="956"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i10-W3-OVq">
                                         <rect key="frame" x="0.0" y="0.0" width="399" height="1300"/>
@@ -25,6 +25,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Wine Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVU-20-TOH">
                                                 <rect key="frame" x="20" y="63" width="374" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -113,6 +114,7 @@
                                             </pickerView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1300" id="Jt3-ii-tBt"/>
                                         </constraints>
@@ -138,18 +140,27 @@
                             <constraint firstItem="i10-W3-OVq" firstAttribute="width" secondItem="Uk3-vs-a6v" secondAttribute="width" id="mhQ-ev-wde"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GQD-qE-xbr" appends="YES" id="LhK-Kk-hbl"/>
+                        </connections>
                     </view>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="priceTextField" destination="z2s-bA-aUj" id="eCM-77-6b4"/>
                         <outlet property="recommendedTextField" destination="UvH-XK-Cin" id="nde-HX-0e1"/>
                         <outlet property="regionTextField" destination="68z-KD-MaW" id="vjw-tO-ncX"/>
+                        <outlet property="scrollView" destination="Uk3-vs-a6v" id="4sC-JR-jzz"/>
                         <outlet property="varietyTextField" destination="Oig-vU-8z6" id="zk6-vU-77D"/>
                         <outlet property="wineTextField" destination="lVU-20-TOH" id="fxe-dA-TVl"/>
                         <outlet property="yearPicker" destination="gEB-de-ZgZ" id="knp-vK-4pR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GQD-qE-xbr">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="BYZ-38-t0r" id="qR1-Wn-sEe"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="132.58928571428572"/>
         </scene>
