@@ -10,6 +10,7 @@ import UIKit;
 
 class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     var years:[Int] = [];
+    var overallRatings:[Int] = [];
     let date = Date();
     let calendar = Calendar.current;
     var activeTextField: UITextField!;
@@ -27,10 +28,14 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var recommendedTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var overallRatingPicker: UIPickerView!
     override func viewDidLoad() {
         let year = calendar.component(.year, from: date);
         for i in 500...year {
             years.append(i)
+        }
+        for i in 50...100 {
+            overallRatings.append(i);
         }
         
         wineTextField.delegate = self;
@@ -42,6 +47,9 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         regionTextField.delegate = self;
         varietyTextField.delegate = self;
         recommendedTextField.delegate = self;
+        
+        overallRatingPicker.delegate = self;
+        overallRatingPicker.dataSource = self;
         
         // observers to handle when the keyboard comes into and
         // out of focus
@@ -113,9 +121,17 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return 1;
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return years.count;
+        if pickerView.tag == 1 {
+            return years.count;
+        } else {
+            return overallRatings.count;
+        }
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(years[row]);
+        if pickerView.tag == 1 {
+            return String(years[row]);
+        } else {
+            return String(overallRatings[row]);
+        }
     }
 }
