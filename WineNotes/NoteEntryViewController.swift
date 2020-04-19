@@ -8,17 +8,21 @@
 
 import UIKit;
 
-class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UITextViewDelegate {
     var years:[Int] = [];
     var overallRatings:[Int] = [];
     let date = Date();
     let calendar = Calendar.current;
     var activeTextField: UITextField!;
+    var activeTextView: UITextView!;
+    var originalCenter: CGPoint!
     
     // called by on tap event
     @IBAction func hideKeyboard(_ sender: AnyObject) {
-        self.activeTextField.endEditing(true);
+        self.view.endEditing(true)
+//        self.activeTextField.endEditing(true);
         self.activeTextField = nil;
+        self.activeTextView = nil;
     }
     @IBOutlet weak var yearPicker: UIPickerView!
     @IBOutlet weak var wineTextField: UITextField!
@@ -26,6 +30,10 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var regionTextField: UITextField!
     @IBOutlet weak var varietyTextField: UITextField!
     @IBOutlet weak var recommendedTextField: UITextField!
+    @IBOutlet weak var placeBoughtTextField: UITextField!
+    @IBOutlet weak var placeTastedTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var overallRatingPicker: UIPickerView!
@@ -38,6 +46,8 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             overallRatings.append(i);
         }
         
+        self.originalCenter = self.view.center;
+        
         wineTextField.delegate = self;
         priceTextField.delegate = self;
         self.priceTextField.keyboardType = UIKeyboardType.decimalPad;
@@ -47,6 +57,9 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         regionTextField.delegate = self;
         varietyTextField.delegate = self;
         recommendedTextField.delegate = self;
+        placeBoughtTextField.delegate = self
+        placeTastedTextField.delegate = self
+        notesTextView.delegate = self
         
         overallRatingPicker.delegate = self;
         overallRatingPicker.dataSource = self;
@@ -92,6 +105,17 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.activeTextField = textField
     }
     
+    /*
+     Why the heck is textFieldDidBeginEditing called prior to keyboard notification
+     but textViewDidBeginEditing isn't?? Now I gotta use shouldBeginEditing so I can
+     set the active text input so it isn't nil when determing the offset of
+     the keyboard
+     */
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.activeTextView = textView
+        return true
+    }
+    
     // adjust keyboard inest height and correct for overlapping input elements
     func adjustInsetForKeyboard(_ show: Bool, notification: Notification) {
         guard
@@ -100,10 +124,26 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 as? NSValue else {
             return;
         }
+        guard
+            let keyboardStart = userInfo[UIResponder.keyboardFrameBeginUserInfoKey]
+                as? NSValue else {
+                    return;
+        }
+        // TODO - need to get proper height calculated.
+        let textInput = self.activeTextView === nil ? self.activeTextField : self.activeTextView
+        let adjustmentHeight = (keyboardFrame.cgRectValue.height + textInput!.frame.height) * (show ? 1 : -1);
+        let start = keyboardStart.cgRectValue.origin.y
+        let bottomOfActiveTextInput = textInput!.frame.height + textInput!.frame.origin.y
+        let whereTheKeyboardComesToOnScreen = start - adjustmentHeight
         
-        let adjustmentHeight = (keyboardFrame.cgRectValue.height + 20) * (show ? 1 : -1);
         scrollView.contentInset.bottom += adjustmentHeight;
         scrollView.verticalScrollIndicatorInsets.bottom += adjustmentHeight;
+        
+        if (show && whereTheKeyboardComesToOnScreen <= bottomOfActiveTextInput) {
+            self.view.center = CGPoint(x: self.originalCenter.x, y: self.originalCenter.y - (bottomOfActiveTextInput - whereTheKeyboardComesToOnScreen))
+        } else {
+            self.view.center = self.originalCenter
+        }
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
