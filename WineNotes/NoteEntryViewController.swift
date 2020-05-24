@@ -28,10 +28,7 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var wineTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var regionTextField: UITextField!
-    @IBOutlet weak var varietyTextField: UITextField!
-    @IBOutlet weak var recommendedTextField: UITextField!
-    @IBOutlet weak var placeBoughtTextField: UITextField!
-    @IBOutlet weak var placeTastedTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -55,10 +52,7 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         yearPicker.delegate = self;
         yearPicker.selectRow(years.count - 3, inComponent: 0, animated: true);
         regionTextField.delegate = self;
-        varietyTextField.delegate = self;
-        recommendedTextField.delegate = self;
-        placeBoughtTextField.delegate = self
-        placeTastedTextField.delegate = self
+        countryTextField.delegate = self;
         notesTextView.delegate = self
         
         overallRatingPicker.delegate = self;
