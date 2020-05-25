@@ -15,7 +15,6 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     let calendar = Calendar.current;
     var activeTextField: UITextField!;
     var activeTextView: UITextView!;
-    var originalCenter: CGPoint!
     
     // called by on tap event
     @IBAction func hideKeyboard(_ sender: AnyObject) {
@@ -42,9 +41,6 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         for i in 50...100 {
             overallRatings.append(i);
         }
-        
-        self.originalCenter = self.view.center;
-        
         wineTextField.delegate = self;
         priceTextField.delegate = self;
         self.priceTextField.keyboardType = UIKeyboardType.decimalPad;
@@ -110,7 +106,7 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return true
     }
     
-    // adjust keyboard inest height and correct for overlapping input elements
+    // adjust keyboard inset height and correct for overlapping input elements
     func adjustInsetForKeyboard(_ show: Bool, notification: Notification) {
         guard
             let userInfo = notification.userInfo,
@@ -118,25 +114,24 @@ class NoteEntryViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 as? NSValue else {
             return;
         }
-        guard
-            let keyboardStart = userInfo[UIResponder.keyboardFrameBeginUserInfoKey]
-                as? NSValue else {
-                    return;
-        }
-        // TODO - need to get proper height calculated.
-        let textInput = self.activeTextView === nil ? self.activeTextField : self.activeTextView
-        let adjustmentHeight = (keyboardFrame.cgRectValue.height + textInput!.frame.height) * (show ? 1 : -1);
-        let start = keyboardStart.cgRectValue.origin.y
-        let bottomOfActiveTextInput = textInput!.frame.height + textInput!.frame.origin.y
-        let whereTheKeyboardComesToOnScreen = start - adjustmentHeight
         
-        scrollView.contentInset.bottom += adjustmentHeight;
-        scrollView.verticalScrollIndicatorInsets.bottom += adjustmentHeight;
+        var viewRect = view.frame
+        let textField = self.activeTextView === nil ? self.activeTextField : self.activeTextView
+        // shrink view field by keyboard height since that will be the total space
+        // allowed while keyboard is active
+        viewRect.size.height -= keyboardFrame.cgRectValue.height
+        // get bottom y-coordinate of textfield
+        let bottomOfTextField = textField!.frame.origin.y + textField!.frame.size.height
         
-        if (show && whereTheKeyboardComesToOnScreen <= bottomOfActiveTextInput) {
-            self.view.center = CGPoint(x: self.originalCenter.x, y: self.originalCenter.y - (bottomOfActiveTextInput - whereTheKeyboardComesToOnScreen))
-        } else {
-            self.view.center = self.originalCenter
+        /*
+         If keyboard covers bottom of text field, scroll amount of overlap
+         */
+        if show && (viewRect.height < (bottomOfTextField)) {
+            let scrollPoint = CGPoint(x: 0, y: bottomOfTextField - keyboardFrame.cgRectValue.height)
+            scrollView.setContentOffset(scrollPoint, animated: true)
+        } else { // reset contentInset
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
         }
     }
     
